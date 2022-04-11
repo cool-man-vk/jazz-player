@@ -12,7 +12,7 @@ class Songs extends StatelessWidget {
         "Bhoomi enna Sutudhe - Ethirneechal",
         desc: "Motivational song for every individual with jobless",
         auto: true,
-        cover: "${Image.network("https://masstamilan.so/i/wp/ethir-neechal.webp")}"
+        cover: ''
       );
     }
     catch(err){
