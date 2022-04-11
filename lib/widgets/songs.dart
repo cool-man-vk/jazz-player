@@ -1,7 +1,26 @@
+import 'package:audio_manager/audio_manager.dart';
 import 'package:flutter/material.dart';
+import '../screens/playing_screen.dart';
 
 class Songs extends StatelessWidget {
-  const Songs({ Key? key }) : super(key: key);
+  var audioManagerInstance = AudioManager.instance;
+
+  Future<void> _playMusic(ctx) async{
+    try{
+      await audioManagerInstance.start(
+        "https://masstamilan.so/downloader/XgOmHaKKqDUT0pC5j1CNmw/1649724303/d128_cdn/7887", 
+        "Bhoomi enna Sutudhe - Ethirneechal",
+        desc: "Motivational song for every individual with jobless",
+        auto: true,
+        cover: "${Image.network("https://masstamilan.so/i/wp/ethir-neechal.webp")}"
+      );
+    }
+    catch(err){
+      print('error');
+    }
+    Navigator.of(ctx).pushNamed(PlayingScreen.routeName);
+  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -9,7 +28,7 @@ class Songs extends StatelessWidget {
       itemCount: 3,
       itemBuilder: 
       (context , index) =>  InkWell(
-        onTap: (){},
+        onTap: () => _playMusic(context),
         child: Card (
           margin: const EdgeInsets.all(8),
           elevation: 5,
