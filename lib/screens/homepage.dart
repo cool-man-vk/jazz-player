@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../widgets/music_lists.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({ Key? key }) : super(key: key);
+  static const routeName = '/';
 
   @override
   Widget build(BuildContext context) {
@@ -15,10 +15,12 @@ class HomePage extends StatelessWidget {
             ]
         ),
       ),
-      body: const SingleChildScrollView(
+      body: SingleChildScrollView(
         child: SizedBox(
           height: 800,
-          child: MusicLists(),
+          child: MusicLists()
+              
+
         ),
       ),
     );

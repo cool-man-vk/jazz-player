@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audio_cache.dart';
 import 'package:audioplayers/audioplayers.dart';
+import '../arguments/playing_screen_arguments.dart';
 
-class MusicApp extends StatefulWidget {
+class PlayingScreen extends StatefulWidget {
 
   static const routeName = '/playing-screen';
+  
   @override
-  _MusicAppState createState() => _MusicAppState();
+  _PlayingScreenState createState() => _PlayingScreenState();
 }
 
-class _MusicAppState extends State<MusicApp> {
+class _PlayingScreenState extends State<PlayingScreen> {
   bool playing = false; 
   IconData playBtn = Icons.play_arrow; 
 
@@ -65,6 +67,7 @@ class _MusicAppState extends State<MusicApp> {
 
   @override
   Widget build(BuildContext context) {
+    final PlayingScreenArgs args = ModalRoute.of(context)?.settings.arguments as PlayingScreenArgs;
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -119,19 +122,18 @@ class _MusicAppState extends State<MusicApp> {
                     height: 280.0,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30.0),
-                        image: const DecorationImage(
-                          image: AssetImage("assets/images/music.jpg"),
+                        image: DecorationImage(
+                          image: AssetImage(args.image),
                         )),
                   ),
                 ),
-
                 const SizedBox(
                   height: 18.0,
                 ),
-                const Center(
+                Center(
                   child: Text(
-                    "Stargazer",
-                    style: TextStyle(
+                    args.songName,
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 32.0,
                       fontWeight: FontWeight.w600,
@@ -196,7 +198,7 @@ class _MusicAppState extends State<MusicApp> {
                                 
                                 if (!playing) {
                                   //now let's play the song
-                                  cache!.play("audio/nanga-vera-maari.mp3");
+                                  cache!.play(args.music);
                                   setState(() {
                                     playBtn = Icons.pause;
                                     playing = true;
