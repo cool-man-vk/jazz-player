@@ -4,11 +4,8 @@ import '../screens/playing_screen.dart';
 import 'package:audioplayers/audio_cache.dart';
 import 'package:audioplayers/audioplayers.dart';
 
-class MusicList extends StatelessWidget {
+class MusicList extends StatefulWidget {
 
-  bool favClicked = false;
-  
-  AudioCache? cache;
   final String id;
   final String songName;
   final String movieName;
@@ -24,6 +21,15 @@ class MusicList extends StatelessWidget {
   );
 
   @override
+  State<MusicList> createState() => _MusicListState();
+}
+
+class _MusicListState extends State<MusicList> {
+  bool favClicked = false;
+
+  AudioCache? cache;
+
+  @override
   Widget build(BuildContext context) {
     return Card(
       elevation: 4,
@@ -31,10 +37,10 @@ class MusicList extends StatelessWidget {
       child: InkWell(
         child: ListTile(
           leading: CircleAvatar(
-            backgroundImage: AssetImage(image),
+            backgroundImage: AssetImage(widget.image),
           ),
-          title: Text(songName),
-          subtitle: Text(movieName),
+          title: Text(widget.songName),
+          subtitle: Text(widget.movieName),
           trailing: SizedBox(
             width: 100,
             child: Row(
@@ -59,8 +65,18 @@ class MusicList extends StatelessWidget {
                   ],
                 ),
                 IconButton(
-                  icon: const Icon(Icons.favorite),
-                  onPressed: (){},
+                  icon: favClicked == false
+                          ? const Icon(Icons.favorite_border)
+                          : const Icon(Icons.favorite , color: Colors.red,) ,
+                  onPressed: (){
+                    setState(() {
+                      if(favClicked == false){
+                      favClicked = true;}
+                      else{
+                        favClicked = false;
+                      }
+                    });
+                  },
                 )
               ],
             ),
@@ -71,9 +87,9 @@ class MusicList extends StatelessWidget {
           Navigator.of(context).pushNamed(
             PlayingScreen.routeName , 
             arguments: PlayingScreenArgs(
-              songName: songName ,
-              image: image ,
-              music: music
+              songName: widget.songName ,
+              image: widget.image ,
+              music: widget.music
             )
           );
         }

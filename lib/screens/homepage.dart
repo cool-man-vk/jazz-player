@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/music_lists.dart';
+import '../widgets/app_drawer.dart';
 
 class HomePage extends StatelessWidget {
   static const routeName = '/';
@@ -15,6 +16,7 @@ class HomePage extends StatelessWidget {
             ]
         ),
       ),
+      drawer: AppDrawer(),
       body: SingleChildScrollView(
         child: SizedBox(
           height: 800,
