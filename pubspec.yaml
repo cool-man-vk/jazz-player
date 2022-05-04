@@ -62,10 +62,18 @@ flutter:
     - assets/images/music.jpg
     - assets/images/neeyum-naanum.jpg
     - assets/images/ar-rahman.jpg 
+    - assets/images/anbe-peranbe-ngk.jpg
+    - assets/images/idhayathai.jpg 
+    - assets/images/saamy-2.jpg
+    - assets/images/sandakozhi-2.jpg
 
     - assets/audio/nanga-vera-maari.mp3
     - assets/audio/neeyum-nanum.mp3
     - assets/audio/andha-arabic.mp3
+    - assets/audio/anbe-peranbe.mp3 
+    - assets/audio/idhayathai-yetho-ondru.mp3
+    - assets/audio/kambathu-ponnu.mp3 
+    - assets/audio/penne-unna-paartha-saamy2.mp3
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

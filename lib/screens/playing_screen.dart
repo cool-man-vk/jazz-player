@@ -90,30 +90,9 @@ class _PlayingScreenState extends State<PlayingScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 //Let's add some text title
-                const Padding(
-                  padding: EdgeInsets.only(left: 12.0),
-                  child: Text(
-                    "Music Beats",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 38.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.only(left: 12.0),
-                  child: Text(
-                    "Listen to your favorite Music",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 24.0,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                ),
+                 
                 const SizedBox(
-                  height: 24.0,
+                  height: 40.0,
                 ),
                 //Let's add the music cover
                 Center(
@@ -135,7 +114,7 @@ class _PlayingScreenState extends State<PlayingScreen> {
                     args.songName,
                     style: const TextStyle(
                       color: Colors.white,
-                      fontSize: 32.0,
+                      fontSize: 18.0,
                       fontWeight: FontWeight.w600,
                     ),
                   ),

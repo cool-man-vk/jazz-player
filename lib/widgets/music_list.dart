@@ -6,6 +6,8 @@ import 'package:audioplayers/audioplayers.dart';
 
 class MusicList extends StatelessWidget {
 
+  bool favClicked = false;
+  
   AudioCache? cache;
   final String id;
   final String songName;
@@ -33,18 +35,48 @@ class MusicList extends StatelessWidget {
           ),
           title: Text(songName),
           subtitle: Text(movieName),
+          trailing: SizedBox(
+            width: 100,
+            child: Row(
+              children: [
+                PopupMenuButton(
+                  onSelected: (value){},
+                  itemBuilder: (context) => [
+                    PopupMenuItem(
+                          child: ElevatedButton(
+                          onPressed: (){}, 
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: const[
+                               Icon(Icons.queue),
+                               SizedBox(width: 6,),
+                               Text('Add to Queue'),
+                            ],
+                          )
+                          )
+                      ),
+                  ],
+                ),
+                IconButton(
+                  icon: const Icon(Icons.favorite),
+                  onPressed: (){},
+                )
+              ],
+            ),
+          ),
         ),
         onTap: () 
         {
-          cache!.play(music);
           Navigator.of(context).pushNamed(
-          PlayingScreen.routeName , 
-          arguments: PlayingScreenArgs(
-            songName: songName ,
-            image: image ,
-            music: music
-          )
-        );}
+            PlayingScreen.routeName , 
+            arguments: PlayingScreenArgs(
+              songName: songName ,
+              image: image ,
+              music: music
+            )
+          );
+        }
       ),
     );
 }
