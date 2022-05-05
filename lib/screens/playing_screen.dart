@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audio_cache.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:music_player_app/arguments/favorites_screen_args.dart';
 import '../arguments/playing_screen_arguments.dart';
+import './favorites_screen.dart';
 
 class PlayingScreen extends StatefulWidget {
 
@@ -163,6 +165,12 @@ class _PlayingScreenState extends State<PlayingScreen> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             IconButton(
+                              iconSize: 40,
+                              color: Colors.blue,
+                              icon: const Icon(Icons.shuffle),
+                              onPressed: (){},
+                            ),
+                            IconButton(
                               iconSize: 45.0,
                               color: Colors.blue,
                               onPressed: () {},
@@ -174,7 +182,6 @@ class _PlayingScreenState extends State<PlayingScreen> {
                               iconSize: 62.0,
                               color: Colors.blue[800],
                               onPressed: () {
-                                
                                 if (!playing) {
                                   //now let's play the song
                                   cache!.play(args.music);
@@ -202,6 +209,17 @@ class _PlayingScreenState extends State<PlayingScreen> {
                                 Icons.skip_next,
                               ),
                             ),
+                            IconButton(
+                              iconSize: 40,
+                              color: Colors.blue,
+                              icon: args.isFavorite == false 
+                                  ? const Icon(Icons.favorite_border) 
+                                  : const Icon(Icons.favorite , color: Colors.red,),
+                                  onPressed: (){
+                                
+                                
+                                  },
+                            )
                           ],
                         )
                       ],

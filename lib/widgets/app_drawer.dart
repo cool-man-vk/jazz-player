@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import '../screens/favorites_screen.dart';
+import '../screens/homepage.dart';
 class AppDrawer extends StatelessWidget {
   const AppDrawer({ Key? key }) : super(key: key);
 
@@ -56,7 +57,9 @@ class AppDrawer extends StatelessWidget {
                     )
                 ],
               ),
-              onTap: (){},
+              onTap: (){
+                Navigator.of(context).pushNamed(HomePage.routeName);
+              },
             ),
           ),
           Container(
@@ -77,7 +80,10 @@ class AppDrawer extends StatelessWidget {
                     )
                 ],
               ),
-              onTap: (){},
+              onTap: (){
+                Navigator.of(context).pushNamed(FavoritesScreen.routeName);
+
+              },
             ),
             
           ),

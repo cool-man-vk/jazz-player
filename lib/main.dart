@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import './screens/homepage.dart';
 import 'screens/playing_screen.dart';
+import './screens/favorites_screen.dart';
 
 
 void main() {
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
       home: HomePage(),
       initialRoute: '/',
       routes: {
+        FavoritesScreen.routeName :(context) => FavoritesScreen(),
         PlayingScreen.routeName : (context) => PlayingScreen()
       },
       

@@ -3,6 +3,9 @@ import '../arguments/playing_screen_arguments.dart';
 import '../screens/playing_screen.dart';
 import 'package:audioplayers/audio_cache.dart';
 import 'package:audioplayers/audioplayers.dart';
+import '../screens/favorites_screen.dart';
+import '../arguments/favorites_screen_args.dart';
+
 
 class MusicList extends StatefulWidget {
 
@@ -76,6 +79,15 @@ class _MusicListState extends State<MusicList> {
                         favClicked = false;
                       }
                     });
+                    Navigator.of(context).pushNamed(
+                                  FavoritesScreen.routeName ,
+                                  arguments: FavoriteScreenArgs(
+                                    widget.image ,
+                                    widget.music ,
+                                    widget.songName ,
+                                    favClicked
+                                  )
+                                );
                   },
                 )
               ],
@@ -87,9 +99,10 @@ class _MusicListState extends State<MusicList> {
           Navigator.of(context).pushNamed(
             PlayingScreen.routeName , 
             arguments: PlayingScreenArgs(
-              songName: widget.songName ,
               image: widget.image ,
-              music: widget.music
+              songName: widget.songName ,
+              music: widget.movieName,
+              isFavorite : favClicked
             )
           );
         }
