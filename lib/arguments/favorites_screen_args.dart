@@ -1,13 +1,7 @@
 class FavoriteScreenArgs {
-  final String image;
-  final String songName;
-  final String movieName;
-  final bool isFavorite;
+  var favLists;
 
   FavoriteScreenArgs(
-    this.image ,
-    this.songName ,
-    this.movieName ,
-    this.isFavorite
+    this.favLists
   );
 }

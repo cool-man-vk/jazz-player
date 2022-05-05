@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import '../arguments/favorites_screen_args.dart';
 
 class FavoritesScreen extends StatefulWidget {
-  const FavoritesScreen({ Key? key }) : super(key: key);
   static const routeName = '/favorites-screen';
+
+  List<FavoriteScreenArgs> favMusic = [];
 
   @override
   State<FavoritesScreen> createState() => _FavoritesScreenState();
@@ -14,6 +15,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
   @override
   Widget build(BuildContext context) {
     final FavoriteScreenArgs args = ModalRoute.of(context)?.settings.arguments as FavoriteScreenArgs;
+    
     return Scaffold(
       appBar: AppBar(
         title: Row(
@@ -33,26 +35,23 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
           ],
         ),
       ),
-      body: args == null 
-      ? const Center(
-        child: Text('No Favourites added yet , start adding some!'),
-      )
-      : Card(
+      body: args!= null && args.favLists['isFavorite'] == true
+      ? Card(
         elevation: 8,
         margin: const EdgeInsets.all(6),
         child: InkWell(
           child:ListTile(
             leading: CircleAvatar(
-              backgroundImage: AssetImage(args.image),
+              backgroundImage: AssetImage(args.favLists['image']),
             ),
-            title: Text(args.songName),
-            subtitle: Text(args.movieName),
-            trailing: Container(
-                
-            ),
+            title: Text(args.favLists['songName']),
+            subtitle: Text(args.favLists['movieName'])
           ),
           onTap: (){},
         ),
+      )
+      : const Center(
+        child: Text('No Favourites added yet , start adding some!'),
       ),
     );
   }
