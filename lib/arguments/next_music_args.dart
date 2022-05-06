@@ -1,11 +1,11 @@
-class PlayingScreenArgs {
+class NextMusicArgs{
   final String songName;
   final String image;
   final String music;
-  final bool isFavorite;
+  final String isFavorite;
 
-  PlayingScreenArgs( {
-    required this.songName ,
+  NextMusicArgs({
+    required this.songName,
     required this.image,
     required this.music ,
     required this.isFavorite

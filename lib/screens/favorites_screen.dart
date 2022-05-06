@@ -35,17 +35,17 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
           ],
         ),
       ),
-      body: args!= null && args.favLists['isFavorite'] == true
+      body: args!= null && args.isFavorite == true
       ? Card(
         elevation: 8,
         margin: const EdgeInsets.all(6),
         child: InkWell(
           child:ListTile(
             leading: CircleAvatar(
-              backgroundImage: AssetImage(args.favLists['image']),
+              backgroundImage: AssetImage(args.image),
             ),
-            title: Text(args.favLists['songName']),
-            subtitle: Text(args.favLists['movieName'])
+            title: Text(args.songName),
+            subtitle: Text(args.movieName)
           ),
           onTap: (){},
         ),

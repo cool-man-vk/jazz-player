@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:audioplayers/audio_cache.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:music_player_app/arguments/favorites_screen_args.dart';
+import 'package:music_player_app/widgets/music_lists.dart';
 import '../arguments/playing_screen_arguments.dart';
 import './favorites_screen.dart';
 
@@ -14,6 +15,51 @@ class PlayingScreen extends StatefulWidget {
 }
 
 class _PlayingScreenState extends State<PlayingScreen> {
+  var musicItemCount = 0;
+  static const musicInfos = [
+      {
+        'songName': 'Nanga Vera maari', 
+        'movieName': 'Valimai',
+        'image': 'assets/images/music.jpg',
+        'music': 'audio/nanga-vera-maari.mp3'
+      },
+      {
+        'songName': 'Neeyum naanum sernthe sellum neram',
+        'movieName': 'Naanum rowdy than',
+        'image': 'assets/images/neeyum-naanum.jpg',
+        'music': 'audio/neeyum-nanum.mp3'
+      },
+      { 
+        'songName': 'Antha arabic kadaloram', 
+        'movieName': 'Bombay', 
+        'image': 'assets/images/ar-rahman.jpg', 
+        'music': 'audio/andha-arabic.mp3'
+      },
+      {
+        'songName':'Anbe Peranbe',
+        'movieName' : 'NGK',
+        'image':'assets/images/anbe-peranbe-ngk.jpg',
+        'music':'audio/anbe-peranbe.mp3'
+      },
+      {
+        'songName':'Idhayathai etho ondru',
+        'movieName' : 'Yennai Arinthal',
+        'image':'assets/images/idhayathai.jpg',
+        'music':'audio/anbe-peranbe.mp3'
+      },
+      {
+        'songName':'Kambathu Ponnu',
+        'movieName':'Sandakozhi-2',
+        'image':'assets/images/sandakozhi-2.jpg',
+        'music':'audio/kambathu-ponnu.mp3'
+      },
+      {
+        'songName':'Penne unna partha',
+        'movieName' : 'Saamy-2',
+        'image':'assets/images/saamy-2.jpg',
+        'music':'audio/penne-unna-paartha-saamy2.mp3'
+      }
+  ];
   bool playing = false; 
   IconData playBtn = Icons.play_arrow; 
 
@@ -137,7 +183,6 @@ class _PlayingScreenState extends State<PlayingScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        
                         SizedBox(
                           width: 500.0,
                           child: Row(
@@ -204,10 +249,19 @@ class _PlayingScreenState extends State<PlayingScreen> {
                             IconButton(
                               iconSize: 45.0,
                               color: Colors.blue,
-                              onPressed: () {},
                               icon: const Icon(
                                 Icons.skip_next,
                               ),
+                              onPressed: () {
+                                setState(() {
+                                  PlayingScreenArgs(
+                                    image: musicInfos[musicItemCount+1]['image']! ,
+                                    songName: musicInfos[musicItemCount+1]['songName']! ,
+                                    music: musicInfos[musicItemCount+1]['music']!,
+                                    isFavorite : args.isFavorite
+                                  );
+                                });
+                              },
                             ),
                             IconButton(
                               iconSize: 40,

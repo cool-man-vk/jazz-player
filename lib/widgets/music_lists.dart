@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:music_player_app/arguments/playing_screen_arguments.dart';
-import './music_list.dart';
 import 'package:audioplayers/audio_cache.dart';
 import 'package:audioplayers/audioplayers.dart';
 import '../screens/favorites_screen.dart';
@@ -72,7 +71,10 @@ class _MusicListsState extends State<MusicLists> {
 
     AudioCache? cache;
 
-  var favLists = <Map>[];
+    var favLists = [
+      
+    ];
+    
     return SizedBox(
       height: 270,
       child: ListView.builder(
@@ -119,26 +121,25 @@ class _MusicListsState extends State<MusicLists> {
                   ],
                 ),
                 IconButton(
-                  icon: favClicked == false
-                          ? const Icon(Icons.favorite_border)
-                          : const Icon(Icons.favorite , color: Colors.red,) ,
+                  icon: favClicked == true
+                          ? const Icon(Icons.favorite , color: Colors.red,)
+                          : const Icon(Icons.favorite_border) ,
                   onPressed: (){
                     setState(() {
                       if(favClicked == false){
                         favClicked = true;
-                        favLists.add({
-                            'image': MusicLists.musicDataDetails[index]['image'] ,
-                            'songName':MusicLists.musicDataDetails[index]['songName'],
-                            'music':MusicLists.musicDataDetails[index]['music'],
-                            'movieName':MusicLists.musicDataDetails[index]['music'],
-                            'isFavourite':favClicked
-                        });
-                        Navigator.of(context).pushNamed(
-                          FavoritesScreen.routeName ,
-                          arguments:FavoriteScreenArgs(
-                            favLists
-                          )
-                        );
+                        if(favClicked == true){
+                            Navigator.of(context).pushNamed(
+                              FavoritesScreen.routeName ,
+                              arguments:FavoriteScreenArgs(
+                                image: MusicLists.musicDataDetails[index]['image']!,
+                                songName: MusicLists.musicDataDetails[index]['songName']!, 
+                                music : MusicLists.musicDataDetails[index]['music']!,
+                                movieName: MusicLists.musicDataDetails[index]['movieName']!,
+                                isFavorite: favClicked,
+                              )
+                            );
+                        }
                       }
                       else{
                         favClicked = false;
