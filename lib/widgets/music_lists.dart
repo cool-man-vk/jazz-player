@@ -3,6 +3,7 @@ import 'package:music_player_app/arguments/playing_screen_arguments.dart';
 import 'package:audioplayers/audio_cache.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:music_player_app/arguments/queue_args.dart';
+import 'package:music_player_app/screens/homepage.dart';
 import 'package:music_player_app/screens/queue_screen.dart';
 import '../screens/favorites_screen.dart';
 import '../arguments/favorites_screen_args.dart';
@@ -70,115 +71,119 @@ class _MusicListsState extends State<MusicLists> {
   @override
   Widget build(BuildContext context) {
     bool favClicked = false;
-
     AudioCache? cache;
-
-    var favLists = [
-      
-    ];
+    bool addToQueue = false;
+    List<Map> queueLists = [];
     
     return SizedBox(
       height: 270,
       child: ListView.builder(
         itemCount: MusicLists.musicDataDetails.length,
         itemBuilder: (context,index) => 
-        // MusicList(
-        //     musicDataDetails[index]['id']!,
-        //     musicDataDetails[index]['songName']!,
-        //     musicDataDetails[index]['movieName']!,
-        //     musicDataDetails[index]['image']!,
-        //     musicDataDetails[index]['music']!
-        // )
         Card(
-      elevation: 4,
-      margin: const EdgeInsets.all(10),
-      child: InkWell(
-        child: ListTile(
-          leading: CircleAvatar(
-            backgroundImage: AssetImage(MusicLists.musicDataDetails[index]['image']!),
-          ),
-          title: Text(MusicLists.musicDataDetails[index]['songName']!),
-          subtitle: Text(MusicLists.musicDataDetails[index]['movieName']!),
-          trailing: SizedBox(
-            width: 100,
-            child: Row(
-              children: [
-                PopupMenuButton(
-                  onSelected: (value){},
-                  itemBuilder: (context) => [
-                    PopupMenuItem(
-                          child: ElevatedButton(
-                          onPressed: (){
-                            Navigator.of(context).pushNamed(
-                              QueueScreen.routeName ,
-                              arguments : QueueArgs(
-                                image: MusicLists.musicDataDetails[index]['image']!, 
-                                songName: MusicLists.musicDataDetails[index]['songName']!, 
-                                movieName: MusicLists.musicDataDetails[index]['movieName']!
+          elevation: 4,
+          margin: const EdgeInsets.all(10),
+          child: InkWell(
+            child: ListTile(
+              leading: CircleAvatar(
+                backgroundImage: AssetImage(MusicLists.musicDataDetails[index]['image']!),
+              ),
+              title: Text(MusicLists.musicDataDetails[index]['songName']!),
+              subtitle: Text(MusicLists.musicDataDetails[index]['movieName']!),
+              trailing: SizedBox(
+                width: 100,
+                child: Row(
+                  children: [
+                    PopupMenuButton(
+                      onSelected: (value){},
+                      itemBuilder: (context) => [
+                        PopupMenuItem(
+                              child: ElevatedButton(
+                              onPressed: (){
+                                setState(() {
+                                  addToQueue = true;
+                                });
+                                if(addToQueue == true){
+                                var newQueueItem = {
+                                  'image': MusicLists.musicDataDetails[index]['image']!,
+                                  'songName': MusicLists.musicDataDetails[index]['songName']!,
+                                  'movieName': MusicLists.musicDataDetails[index]['songName']!, 
+                                 };
+                                  queueLists.add(newQueueItem);
+                                }
+                                else {
+                                  addToQueue = false;
+                                }
+                                Navigator.of(context).pushNamed(
+                                  QueueScreen.routeName,
+                                  arguments: QueueArgs(
+                                    image: MusicLists.musicDataDetails[index]['image']!,
+                                    songName: MusicLists.musicDataDetails[index]['songName']!,
+                                    movieName: MusicLists.musicDataDetails[index]['movieName']!
+                                  )
+                                );
+                              }, 
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: const[
+                                  Icon(Icons.queue),
+                                  SizedBox(width: 6,),
+                                  Text('Add to Queue'),
+                                ],
                               )
-                            );
-                          }, 
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: const[
-                               Icon(Icons.queue),
-                               SizedBox(width: 6,),
-                               Text('Add to Queue'),
-                            ],
-                          )
-                          )
-                      ),
+                              )
+                          ),
+                      ],
+                    ),
+                    IconButton(
+                      icon: favClicked == true
+                              ? const Icon(Icons.favorite , color: Colors.red,)
+                              : const Icon(Icons.favorite_border) ,
+                      onPressed: (){
+                        setState(() {
+                          if(favClicked == false){
+                            favClicked = true;
+                            if(favClicked == true){
+                                Navigator.of(context).pushNamed(
+                                  FavoritesScreen.routeName ,
+                                  arguments:FavoriteScreenArgs(
+                                    image: MusicLists.musicDataDetails[index]['image']!,
+                                    songName: MusicLists.musicDataDetails[index]['songName']!, 
+                                    music : MusicLists.musicDataDetails[index]['music']!,
+                                    movieName: MusicLists.musicDataDetails[index]['movieName']!,
+                                    isFavorite: favClicked,
+                                  )
+                                );
+                            }
+                          }
+                          else{
+                            favClicked = false;
+                          }
+                        });
+                        // FavoritesList;
+                      },
+                    )
                   ],
                 ),
-                IconButton(
-                  icon: favClicked == true
-                          ? const Icon(Icons.favorite , color: Colors.red,)
-                          : const Icon(Icons.favorite_border) ,
-                  onPressed: (){
-                    setState(() {
-                      if(favClicked == false){
-                        favClicked = true;
-                        if(favClicked == true){
-                            Navigator.of(context).pushNamed(
-                              FavoritesScreen.routeName ,
-                              arguments:FavoriteScreenArgs(
-                                image: MusicLists.musicDataDetails[index]['image']!,
-                                songName: MusicLists.musicDataDetails[index]['songName']!, 
-                                music : MusicLists.musicDataDetails[index]['music']!,
-                                movieName: MusicLists.musicDataDetails[index]['movieName']!,
-                                isFavorite: favClicked,
-                              )
-                            );
-                        }
-                      }
-                      else{
-                        favClicked = false;
-                      }
-                    });
-                    // FavoritesList;
-                  },
-                )
-              ],
+              ),
             ),
+            onTap: () 
+            {
+              Navigator.of(context).pushNamed(
+                PlayingScreen.routeName , 
+                arguments: PlayingScreenArgs(
+                  image: MusicLists.musicDataDetails[index]['image']! ,
+                  songName: MusicLists.musicDataDetails[index]['songName']! ,
+                  music: MusicLists.musicDataDetails[index]['music']!,
+                  isFavorite : favClicked ,
+                  index : index
+                )
+              );
+            },
+            splashColor: Colors.blue,
           ),
-        ),
-        onTap: () 
-        {
-          Navigator.of(context).pushNamed(
-            PlayingScreen.routeName , 
-            arguments: PlayingScreenArgs(
-              image: MusicLists.musicDataDetails[index]['image']! ,
-              songName: MusicLists.musicDataDetails[index]['songName']! ,
-              music: MusicLists.musicDataDetails[index]['music']!,
-              isFavorite : favClicked ,
-              index : index
-            )
-          );
-        },
-        splashColor: Colors.blue,
-      ),
-    )
+        )
       ),
     );
   }

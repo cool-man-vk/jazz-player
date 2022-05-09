@@ -224,9 +224,10 @@ class _PlayingScreenState extends State<PlayingScreen> {
                                 Icons.skip_previous,
                               ),
                               onPressed: () {
+                                _player!.pause();
                                 Navigator.of(context).pushReplacementNamed(
                                   PlayingScreen.routeName,
-                                  arguments: musicInfos.length == 0
+                                  arguments: indexCount == 0
                                       ? PlayingScreenArgs(
                                       image: MusicLists.musicDataDetails[indexCount = 6]['image']! ,
                                       songName: MusicLists.musicDataDetails[indexCount = 6]['songName']! ,
@@ -251,7 +252,7 @@ class _PlayingScreenState extends State<PlayingScreen> {
                               onPressed: () {
                                 if (!playing) {
                                   //now let's play the song
-                                  cache!.play(args.music);
+                                  cache!.play(musicInfos[indexCount]['music']!);
                                   setState(() {
                                     playBtn = Icons.pause;
                                     playing = true;
@@ -275,10 +276,11 @@ class _PlayingScreenState extends State<PlayingScreen> {
                                 Icons.skip_next,
                               ),
                               onPressed: () {
+                                _player!.pause();
                                 Navigator.of(context).pushReplacementNamed(
                                   PlayingScreen.routeName ,
                                   arguments: 
-                                  musicInfos.length == indexCount
+                                  indexCount == 6
                                       ? PlayingScreenArgs(
                                       image: MusicLists.musicDataDetails[indexCount = 0]['image']! ,
                                       songName: MusicLists.musicDataDetails[indexCount = 0]['songName']! ,

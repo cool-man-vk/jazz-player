@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:music_player_app/arguments/queue_args.dart';
+import 'package:music_player_app/screens/queue_screen.dart';
 import '../screens/favorites_screen.dart';
 import '../screens/homepage.dart';
 class AppDrawer extends StatelessWidget {
-  const AppDrawer({ Key? key }) : super(key: key);
+  
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +97,7 @@ class AppDrawer extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: const[
-                    Icon(Icons.favorite , size: 22,),
+                    Icon(Icons.queue , size: 22),
                     SizedBox(width: 8),
                     Text(
                       'My Queue',
@@ -106,7 +108,10 @@ class AppDrawer extends StatelessWidget {
                 ],
               ),
               onTap: (){
-                Navigator.of(context).pushNamed(FavoritesScreen.routeName);
+                Navigator.of(context).pushNamed(
+                  QueueScreen.routeName 
+                  
+                );
 
               },
             ),
