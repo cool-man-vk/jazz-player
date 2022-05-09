@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:music_player_app/arguments/playing_screen_arguments.dart';
 import 'package:audioplayers/audio_cache.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:music_player_app/arguments/queue_args.dart';
+import 'package:music_player_app/screens/queue_screen.dart';
 import '../screens/favorites_screen.dart';
 import '../arguments/favorites_screen_args.dart';
 import '../screens/playing_screen.dart';
@@ -106,7 +108,16 @@ class _MusicListsState extends State<MusicLists> {
                   itemBuilder: (context) => [
                     PopupMenuItem(
                           child: ElevatedButton(
-                          onPressed: (){}, 
+                          onPressed: (){
+                            Navigator.of(context).pushNamed(
+                              QueueScreen.routeName ,
+                              arguments : QueueArgs(
+                                image: MusicLists.musicDataDetails[index]['image']!, 
+                                songName: MusicLists.musicDataDetails[index]['songName']!, 
+                                movieName: MusicLists.musicDataDetails[index]['movieName']!
+                              )
+                            );
+                          }, 
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -160,7 +171,8 @@ class _MusicListsState extends State<MusicLists> {
               image: MusicLists.musicDataDetails[index]['image']! ,
               songName: MusicLists.musicDataDetails[index]['songName']! ,
               music: MusicLists.musicDataDetails[index]['music']!,
-              isFavorite : favClicked
+              isFavorite : favClicked ,
+              index : index
             )
           );
         },

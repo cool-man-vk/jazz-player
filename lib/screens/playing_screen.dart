@@ -5,6 +5,7 @@ import 'package:music_player_app/arguments/favorites_screen_args.dart';
 import 'package:music_player_app/widgets/music_lists.dart';
 import '../arguments/playing_screen_arguments.dart';
 import './favorites_screen.dart';
+import 'dart:math';
 
 class PlayingScreen extends StatefulWidget {
 
@@ -69,6 +70,11 @@ class _PlayingScreenState extends State<PlayingScreen> {
   Duration position = new Duration();
   Duration musicLength = new Duration();
 
+  var shuffleCount = Random();
+
+  
+
+
   //custom slider
 
   Widget slider() {
@@ -116,6 +122,8 @@ class _PlayingScreenState extends State<PlayingScreen> {
   @override
   Widget build(BuildContext context) {
     final PlayingScreenArgs args = ModalRoute.of(context)?.settings.arguments as PlayingScreenArgs;
+
+    var indexCount = args.index;
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -150,7 +158,7 @@ class _PlayingScreenState extends State<PlayingScreen> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30.0),
                         image: DecorationImage(
-                          image: AssetImage(args.image),
+                          image: AssetImage(musicInfos[indexCount]['image']!),
                         )),
                   ),
                 ),
@@ -159,7 +167,7 @@ class _PlayingScreenState extends State<PlayingScreen> {
                 ),
                 Center(
                   child: Text(
-                    args.songName,
+                    musicInfos[indexCount]['songName']!,
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 18.0,
@@ -210,18 +218,32 @@ class _PlayingScreenState extends State<PlayingScreen> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             IconButton(
-                              iconSize: 40,
-                              color: Colors.blue,
-                              icon: const Icon(Icons.shuffle),
-                              onPressed: (){},
-                            ),
-                            IconButton(
                               iconSize: 45.0,
                               color: Colors.blue,
-                              onPressed: () {},
                               icon: const Icon(
                                 Icons.skip_previous,
                               ),
+                              onPressed: () {
+                                Navigator.of(context).pushReplacementNamed(
+                                  PlayingScreen.routeName,
+                                  arguments: musicInfos.length == 0
+                                      ? PlayingScreenArgs(
+                                      image: MusicLists.musicDataDetails[indexCount = 6]['image']! ,
+                                      songName: MusicLists.musicDataDetails[indexCount = 6]['songName']! ,
+                                      music: MusicLists.musicDataDetails[indexCount = 6]['music']!,
+                                      isFavorite : args.isFavorite ,
+                                      index : indexCount = 6
+                                    )
+                                      : PlayingScreenArgs(
+                                      image: MusicLists.musicDataDetails[indexCount-1]['image']! ,
+                                      songName: MusicLists.musicDataDetails[indexCount-1]['songName']! ,
+                                      music: MusicLists.musicDataDetails[indexCount-1]['music']!,
+                                      isFavorite : args.isFavorite ,
+                                      index : indexCount -1
+                                    )
+                                );
+                               
+                              },
                             ),
                             IconButton(
                               iconSize: 62.0,
@@ -253,14 +275,25 @@ class _PlayingScreenState extends State<PlayingScreen> {
                                 Icons.skip_next,
                               ),
                               onPressed: () {
-                                setState(() {
-                                  PlayingScreenArgs(
-                                    image: musicInfos[musicItemCount+1]['image']! ,
-                                    songName: musicInfos[musicItemCount+1]['songName']! ,
-                                    music: musicInfos[musicItemCount+1]['music']!,
-                                    isFavorite : args.isFavorite
-                                  );
-                                });
+                                Navigator.of(context).pushReplacementNamed(
+                                  PlayingScreen.routeName ,
+                                  arguments: 
+                                  musicInfos.length == indexCount
+                                      ? PlayingScreenArgs(
+                                      image: MusicLists.musicDataDetails[indexCount = 0]['image']! ,
+                                      songName: MusicLists.musicDataDetails[indexCount = 0]['songName']! ,
+                                      music: MusicLists.musicDataDetails[indexCount = 0]['music']!,
+                                      isFavorite : args.isFavorite ,
+                                      index : indexCount = 0 
+                                    )
+                                      : PlayingScreenArgs(
+                                      image: MusicLists.musicDataDetails[indexCount+1]['image']! ,
+                                      songName: MusicLists.musicDataDetails[indexCount+1]['songName']! ,
+                                      music: MusicLists.musicDataDetails[indexCount+1]['music']!,
+                                      isFavorite : args.isFavorite ,
+                                      index : indexCount + 1
+                                    )
+                                );
                               },
                             ),
                             IconButton(

@@ -16,7 +16,7 @@ class HomePage extends StatelessWidget {
             ]
         ),
       ),
-      drawer: AppDrawer(),
+      drawer: const AppDrawer(),
       body: SingleChildScrollView(
         child: SizedBox(
           height: 800,
