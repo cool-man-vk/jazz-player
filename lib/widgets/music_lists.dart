@@ -122,7 +122,7 @@ class _MusicListsState extends State<MusicLists> {
                                     movieName: MusicLists.musicDataDetails[index]['movieName']!
                                   )
                                 );
-                              }, 
+                              },                               
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -132,6 +132,7 @@ class _MusicListsState extends State<MusicLists> {
                                   Text('Add to Queue'),
                                 ],
                               )
+                              
                               )
                           ),
                       ],

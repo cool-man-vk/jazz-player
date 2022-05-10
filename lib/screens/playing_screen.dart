@@ -229,11 +229,11 @@ class _PlayingScreenState extends State<PlayingScreen> {
                                   PlayingScreen.routeName,
                                   arguments: indexCount == 0
                                       ? PlayingScreenArgs(
-                                      image: MusicLists.musicDataDetails[indexCount = 6]['image']! ,
-                                      songName: MusicLists.musicDataDetails[indexCount = 6]['songName']! ,
-                                      music: MusicLists.musicDataDetails[indexCount = 6]['music']!,
+                                      image: MusicLists.musicDataDetails[MusicLists.musicDataDetails.length-1]['image']! ,
+                                      songName: MusicLists.musicDataDetails[MusicLists.musicDataDetails.length-1]['songName']! ,
+                                      music: MusicLists.musicDataDetails[MusicLists.musicDataDetails.length-1]['music']!,
                                       isFavorite : args.isFavorite ,
-                                      index : indexCount = 6
+                                      index : MusicLists.musicDataDetails.length-1
                                     )
                                       : PlayingScreenArgs(
                                       image: MusicLists.musicDataDetails[indexCount-1]['image']! ,

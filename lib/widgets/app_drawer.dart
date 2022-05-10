@@ -26,7 +26,7 @@ class AppDrawer extends StatelessWidget {
                     size: 30,
                     color: Colors.white
                   ),
-                  SizedBox(width: 5,),
+                  SizedBox(width: 5),
                   Text(
                     'Jazz Player',
                     style: TextStyle(
@@ -110,7 +110,6 @@ class AppDrawer extends StatelessWidget {
               onTap: (){
                 Navigator.of(context).pushNamed(
                   QueueScreen.routeName 
-                  
                 );
 
               },

@@ -4,7 +4,6 @@ import 'screens/playing_screen.dart';
 import './screens/favorites_screen.dart';
 import './screens/queue_screen.dart';
 
-
 void main() {
   runApp(MyApp());
 }
@@ -18,12 +17,10 @@ class MyApp extends StatelessWidget {
       home: HomePage(),
       initialRoute: '/',
       routes: {
-        FavoritesScreen.routeName :(context) => FavoritesScreen(),
-        PlayingScreen.routeName : (context) => PlayingScreen() ,
-        QueueScreen.routeName : (context) => QueueScreen()
+        FavoritesScreen.routeName: (context) => FavoritesScreen(),
+        PlayingScreen.routeName: (context) => PlayingScreen(),
+        QueueScreen.routeName: (context) => QueueScreen()
       },
-      
     );
   }
 }
-
