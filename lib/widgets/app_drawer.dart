@@ -49,7 +49,7 @@ class AppDrawer extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: const[
-                    Icon(Icons.home , size: 22,),
+                    Icon(Icons.home , size: 22),
                     SizedBox(width: 8),
                     Text(
                       'Home',

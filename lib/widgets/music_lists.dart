@@ -72,8 +72,6 @@ class _MusicListsState extends State<MusicLists> {
   Widget build(BuildContext context) {
     bool favClicked = false;
     AudioCache? cache;
-    bool addToQueue = false;
-    List<QueueArgs> queueLists = [];
     
     return SizedBox(
       height: 270,
