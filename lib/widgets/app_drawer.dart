@@ -64,58 +64,6 @@ class AppDrawer extends StatelessWidget {
               },
             ),
           ),
-          Container(
-            height: 55,
-            padding: const EdgeInsets.all(15),
-            child: InkWell(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: const[
-                    Icon(Icons.favorite , size: 22,),
-                    SizedBox(width: 8),
-                    Text(
-                      'My Favorites',
-                      style: TextStyle(
-                        fontSize: 16
-                      ),
-                    )
-                ],
-              ),
-              onTap: (){
-                Navigator.of(context).pushNamed(FavoritesScreen.routeName);
-
-              },
-            ),
-            
-          ),
-          Container(
-            height: 55,
-            padding: const EdgeInsets.all(15),
-            child: InkWell(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: const[
-                    Icon(Icons.queue , size: 22),
-                    SizedBox(width: 8),
-                    Text(
-                      'My Queue',
-                      style: TextStyle(
-                        fontSize: 16
-                      ),
-                    )
-                ],
-              ),
-              onTap: (){
-                Navigator.of(context).pushNamed(
-                  QueueScreen.routeName 
-                );
-
-              },
-            ),
-            
-          ),
         ],
       ),
     );

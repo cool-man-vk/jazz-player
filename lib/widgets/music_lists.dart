@@ -73,7 +73,7 @@ class _MusicListsState extends State<MusicLists> {
     bool favClicked = false;
     AudioCache? cache;
     bool addToQueue = false;
-    List<Map> queueLists = [];
+    List<QueueArgs> queueLists = [];
     
     return SizedBox(
       height: 270,
@@ -93,77 +93,20 @@ class _MusicListsState extends State<MusicLists> {
               trailing: SizedBox(
                 width: 100,
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    PopupMenuButton(
-                      onSelected: (value){},
-                      itemBuilder: (context) => [
-                        PopupMenuItem(
-                              child: ElevatedButton(
-                              onPressed: (){
-                                setState(() {
-                                  addToQueue = true;
-                                });
-                                if(addToQueue == true){
-                                var newQueueItem = {
-                                  'image': MusicLists.musicDataDetails[index]['image']!,
-                                  'songName': MusicLists.musicDataDetails[index]['songName']!,
-                                  'movieName': MusicLists.musicDataDetails[index]['songName']!, 
-                                 };
-                                  queueLists.add(newQueueItem);
-                                }
-                                else {
-                                  addToQueue = false;
-                                }
-                                Navigator.of(context).pushNamed(
-                                  QueueScreen.routeName,
-                                  arguments: QueueArgs(
-                                    image: MusicLists.musicDataDetails[index]['image']!,
-                                    songName: MusicLists.musicDataDetails[index]['songName']!,
-                                    movieName: MusicLists.musicDataDetails[index]['movieName']!
-                                  )
-                                );
-                              },                               
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: const[
-                                  Icon(Icons.queue),
-                                  SizedBox(width: 6,),
-                                  Text('Add to Queue'),
-                                ],
-                              )
-                              
-                              )
-                          ),
-                      ],
-                    ),
                     IconButton(
-                      icon: favClicked == true
-                              ? const Icon(Icons.favorite , color: Colors.red,)
-                              : const Icon(Icons.favorite_border) ,
                       onPressed: (){
                         setState(() {
-                          if(favClicked == false){
-                            favClicked = true;
-                            if(favClicked == true){
-                                Navigator.of(context).pushNamed(
-                                  FavoritesScreen.routeName ,
-                                  arguments:FavoriteScreenArgs(
-                                    image: MusicLists.musicDataDetails[index]['image']!,
-                                    songName: MusicLists.musicDataDetails[index]['songName']!, 
-                                    music : MusicLists.musicDataDetails[index]['music']!,
-                                    movieName: MusicLists.musicDataDetails[index]['movieName']!,
-                                    isFavorite: favClicked,
-                                  )
-                                );
-                            }
-                          }
-                          else{
-                            favClicked = false;
-                          }
+                          favClicked = true;
                         });
                         // FavoritesList;
                       },
+                      icon: favClicked == true
+                              ? const Icon(Icons.favorite ,color: Colors.red,)
+                              : const Icon(Icons.favorite_border) ,
+                      
                     )
                   ],
                 ),
