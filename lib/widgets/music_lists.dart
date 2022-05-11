@@ -97,11 +97,10 @@ class _MusicListsState extends State<MusicLists> {
                     IconButton(
                       onPressed: (){
                         setState(() {
-                          favClicked = true;
+                            favClicked = !favClicked; 
                         });
-                        // FavoritesList;
                       },
-                      icon: favClicked == true
+                      icon: favClicked == false
                               ? const Icon(Icons.favorite ,color: Colors.red,)
                               : const Icon(Icons.favorite_border) ,
                       
