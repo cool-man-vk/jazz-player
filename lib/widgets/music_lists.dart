@@ -79,15 +79,11 @@ class _MusicListsState extends State<MusicLists> {
     var songsQueue = <Map>[];
     var queueCount = 0;
 
-    void addToQueue(int index){
+    void addToQueue(String image,String song,String movie,int index){
       setState(() {
         addSongsToQueue = !addSongsToQueue; 
         if(addSongsToQueue == true){
-            songsQueue.insert(queueCount,{
-                'movieName' : MusicLists.musicDataDetails[index]['movieName']
-              });
-            queueCount++;
-
+           
         } 
         showModalBottomSheet(
           context: context, 
@@ -135,8 +131,10 @@ class _MusicListsState extends State<MusicLists> {
                     IconButton(
                       icon: const Icon(Icons.queue_music ,color: Colors.black,),
                       onPressed: () => addToQueue(
-                        
-                        index
+                        MusicLists.musicDataDetails[index]['image']!,
+                        MusicLists.musicDataDetails[index]['songName']!,
+                        MusicLists.musicDataDetails[index]['movieName']!,
+                        index,
                       )
                       
                     )

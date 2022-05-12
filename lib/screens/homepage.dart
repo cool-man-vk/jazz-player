@@ -9,26 +9,9 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // title:const Text('JazzPlayer'),
         title: Row(
           children: const [Icon(Icons.music_note), Text('Jazz Player')],
         ),
-        actions: [
-          IconButton(
-              icon: const Icon(Icons.search),
-              onPressed: () {
-                showSearch(
-                  context: context,
-                  delegate: MySearchDelegate(),
-                );
-              })
-        ],
-        // title: Row(
-        //   children : const [
-        //     Icon(Icons.music_note),
-        //     Text('Jazz Player')
-        //     ],
-        // ),
       ),
       drawer: AppDrawer(),
       body: SingleChildScrollView(
@@ -39,7 +22,3 @@ class HomePage extends StatelessWidget {
 }
 
 
-class  MySearchDelegate extends SearchDelegate{
-  @override
-  Widget? bulidLeading(BuildContext context) => Container()
-}
