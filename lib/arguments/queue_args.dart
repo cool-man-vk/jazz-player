@@ -1,4 +1,12 @@
-class QueueArgs {
+
+
+
+import 'dart:collection';
+
+class QueueArgs extends LinkedListEntry
+
+
+<QueueArgs>{
   String image;
   String songName;
   String movieName;

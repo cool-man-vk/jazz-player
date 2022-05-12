@@ -1,10 +1,12 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
-import 'package:music_player_app/arguments/playing_screen_arguments.dart';
+import 'package:music_player_app/screens/queue_screen.dart';
+import '../arguments/queue_args_get.dart';
+import '../arguments/playing_screen_arguments.dart';
 import 'package:audioplayers/audio_cache.dart';
 import 'package:audioplayers/audioplayers.dart';
-import 'package:music_player_app/arguments/queue_args.dart';
-import 'package:music_player_app/screens/homepage.dart';
-import 'package:music_player_app/screens/queue_screen.dart';
+import '../arguments/queue_args.dart';
 import '../screens/favorites_screen.dart';
 import '../arguments/favorites_screen_args.dart';
 import '../screens/playing_screen.dart';
@@ -72,6 +74,51 @@ class _MusicListsState extends State<MusicLists> {
   Widget build(BuildContext context) {
     bool favClicked = false;
     AudioCache? cache;
+    //LinkedList<QueueArgs> linkedListViewQueue = LinkedList<QueueArgs>();
+    bool addSongsToQueue = false;
+
+    void addToQueue(int index){
+      setState(() {
+        addSongsToQueue = !addSongsToQueue; 
+        if(addSongsToQueue == true){
+          QueueArgsGet(
+            image: MusicLists.musicDataDetails[index]['image']!,
+            songName: MusicLists.musicDataDetails[index]['songName']!,
+            movieName:MusicLists.musicDataDetails[index]['movieName']!
+          );
+        }
+        showModalBottomSheet(
+          context: context, 
+          builder: (_){
+            return Center(
+              child: Text(MusicLists.musicDataDetails[index]['movieName']!),
+            );
+          });       
+      });
+      
+      // linkedListViewQueue.add(
+      //                     QueueArgs(
+      //                         image: MusicLists.musicDataDetails[index]['image']!, 
+      //                         songName: MusicLists.musicDataDetails[index]['songName']!, 
+      //                         movieName: MusicLists.musicDataDetails[index]['movieName']!
+      //                     )
+      // );
+      // setState(() {
+      //   showModalBottomSheet(
+      //     context: context, 
+      //     builder: (_){
+      //       return Center(
+      //         child: ListView(
+      //           children: [
+      //             for (var items in linkedListViewQueue)
+      //                 Text(items.movieName)
+      //           ],
+      //         ),
+      //       );
+      //     });
+      // });
+              
+    }
     
     return SizedBox(
       height: 270,
@@ -91,8 +138,8 @@ class _MusicListsState extends State<MusicLists> {
               trailing: SizedBox(
                 width: 100,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     IconButton(
                       onPressed: (){
@@ -103,6 +150,11 @@ class _MusicListsState extends State<MusicLists> {
                       icon: favClicked == false
                               ? const Icon(Icons.favorite ,color: Colors.red,)
                               : const Icon(Icons.favorite_border) ,
+                      
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.queue_music ,color: Colors.black,),
+                      onPressed: () => addToQueue(index)
                       
                     )
                   ],

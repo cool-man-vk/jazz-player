@@ -145,8 +145,6 @@ class _PlayingScreenState extends State<PlayingScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                //Let's add some text title
-                 
                 const SizedBox(
                   height: 40.0,
                 ),
