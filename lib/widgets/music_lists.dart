@@ -76,47 +76,27 @@ class _MusicListsState extends State<MusicLists> {
     AudioCache? cache;
     //LinkedList<QueueArgs> linkedListViewQueue = LinkedList<QueueArgs>();
     bool addSongsToQueue = false;
+    var songsQueue = <Map>[];
+    var queueCount = 0;
 
     void addToQueue(int index){
       setState(() {
         addSongsToQueue = !addSongsToQueue; 
         if(addSongsToQueue == true){
-          QueueArgsGet(
-            image: MusicLists.musicDataDetails[index]['image']!,
-            songName: MusicLists.musicDataDetails[index]['songName']!,
-            movieName:MusicLists.musicDataDetails[index]['movieName']!
-          );
-        }
+            songsQueue.insert(queueCount,{
+                'movieName' : MusicLists.musicDataDetails[index]['movieName']
+              });
+            queueCount++;
+
+        } 
         showModalBottomSheet(
           context: context, 
           builder: (_){
             return Center(
-              child: Text(MusicLists.musicDataDetails[index]['movieName']!),
+              child: Text(songsQueue[index]['movieName']),
             );
           });       
       });
-      
-      // linkedListViewQueue.add(
-      //                     QueueArgs(
-      //                         image: MusicLists.musicDataDetails[index]['image']!, 
-      //                         songName: MusicLists.musicDataDetails[index]['songName']!, 
-      //                         movieName: MusicLists.musicDataDetails[index]['movieName']!
-      //                     )
-      // );
-      // setState(() {
-      //   showModalBottomSheet(
-      //     context: context, 
-      //     builder: (_){
-      //       return Center(
-      //         child: ListView(
-      //           children: [
-      //             for (var items in linkedListViewQueue)
-      //                 Text(items.movieName)
-      //           ],
-      //         ),
-      //       );
-      //     });
-      // });
               
     }
     
@@ -144,17 +124,20 @@ class _MusicListsState extends State<MusicLists> {
                     IconButton(
                       onPressed: (){
                         setState(() {
-                            favClicked = !favClicked; 
+                          favClicked = !favClicked;
                         });
                       },
-                      icon: favClicked == false
-                              ? const Icon(Icons.favorite ,color: Colors.red,)
-                              : const Icon(Icons.favorite_border) ,
+                      icon: favClicked == true 
+                          ? const Icon(Icons.favorite)
+                          : const Icon(Icons.favorite_border)
                       
                     ),
                     IconButton(
                       icon: const Icon(Icons.queue_music ,color: Colors.black,),
-                      onPressed: () => addToQueue(index)
+                      onPressed: () => addToQueue(
+                        
+                        index
+                      )
                       
                     )
                   ],
