@@ -72,10 +72,10 @@ class AppDrawer extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: const[
-                    Icon(Icons.playlist_add , size: 22),
+                    Icon(Icons.info , size: 22),
                     SizedBox(width: 8),
                     Text(
-                      'My Queue',
+                      'About the App',
                       style: TextStyle(
                         fontSize: 16
                       ),

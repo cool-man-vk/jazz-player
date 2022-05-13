@@ -13,7 +13,14 @@ import '../screens/playing_screen.dart';
 
 
 class MusicLists extends StatefulWidget {
-  static const musicDataDetails = [
+  
+
+  @override
+  State<MusicLists> createState() => _MusicListsState();
+}
+
+class _MusicListsState extends State<MusicLists> {
+  List musicDataDetails = [
       {
         'id': '1001', 
         'songName': 'Nanga Vera maari', 
@@ -62,44 +69,62 @@ class MusicLists extends StatefulWidget {
         'movieName' : 'Saamy-2',
         'image':'assets/images/saamy-2.jpg',
         'music':'audio/penne-unna-paartha-saamy2.mp3'
+      },
+      {
+        'id':'1008',
+        'songName':'Inkem inkem kavaley',
+        'movieName' : 'Geeta Govindam',
+        'image':'assets/images/geeta-govindam.jpeg',
+        'music':'audio/inkem-inkem.mp3'
+      },
+      {
+        'id':'1009',
+        'songName':'Jada Jada - motivational song',
+        'movieName' : 'Saattai',
+        'image':'assets/images/samuthirakani.jpg',
+        'music':'audio/jada-jada.mp3'
       }
+
   ];
+  List favLists = [];
 
-  @override
-  State<MusicLists> createState() => _MusicListsState();
-}
 
-class _MusicListsState extends State<MusicLists> {
   @override
   Widget build(BuildContext context) {
     bool favClicked = false;
     AudioCache? cache;
-    //LinkedList<QueueArgs> linkedListViewQueue = LinkedList<QueueArgs>();
-    bool addSongsToQueue = false;
-    var songsQueue = <Map>[];
-    var queueCount = 0;
+    
 
-    void addToQueue(String image,String song,String movie,int index){
-      setState(() {
-        addSongsToQueue = !addSongsToQueue; 
-        if(addSongsToQueue == true){
-           
-        } 
-        showModalBottomSheet(
-          context: context, 
-          builder: (_){
-            return Center(
-              child: Text(songsQueue[index]['movieName']),
-            );
-          });       
-      });
+    void setFav(String image,String songName,String movieName,String music){
+        setState(() {
+          favClicked = !favClicked;
+        });
+
+        if(favClicked == true){
+              favLists.add({
+                'image':image,
+                'songName':songName,
+                'movieName':movieName,
+                'music':music
+              });
               
+              print(favLists);
+              Navigator.of(context).pushNamed(
+                FavoritesScreen.routeName,
+                arguments: FavoriteScreenArgs(
+                  favMusic: favLists
+                )
+              );
+          }
+          else{
+            return;
+          }
     }
     
     return SizedBox(
       height: 270,
       child: ListView.builder(
-        itemCount: MusicLists.musicDataDetails.length,
+        itemCount: musicDataDetails.length,
         itemBuilder: (context,index) => 
         Card(
           elevation: 4,
@@ -107,10 +132,10 @@ class _MusicListsState extends State<MusicLists> {
           child: InkWell(
             child: ListTile(
               leading: CircleAvatar(
-                backgroundImage: AssetImage(MusicLists.musicDataDetails[index]['image']!),
+                backgroundImage: AssetImage(musicDataDetails[index]['image']!),
               ),
-              title: Text(MusicLists.musicDataDetails[index]['songName']!),
-              subtitle: Text(MusicLists.musicDataDetails[index]['movieName']!),
+              title: Text(musicDataDetails[index]['songName']!),
+              subtitle: Text(musicDataDetails[index]['movieName']!),
               trailing: SizedBox(
                 width: 100,
                 child: Row(
@@ -118,24 +143,29 @@ class _MusicListsState extends State<MusicLists> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     IconButton(
-                      onPressed: (){
-                        setState(() {
-                          favClicked = !favClicked;
-                        });
+                      onPressed: () {
+                           setFav(
+                             musicDataDetails[index]['image'],
+                             musicDataDetails[index]['songName'],
+                             musicDataDetails[index]['movieName'],
+                             musicDataDetails[index]['music']
+                           );
                       },
+                        
                       icon: favClicked == true 
                           ? const Icon(Icons.favorite)
                           : const Icon(Icons.favorite_border)
                       
                     ),
                     IconButton(
-                      icon: const Icon(Icons.queue_music ,color: Colors.black,),
-                      onPressed: () => addToQueue(
-                        MusicLists.musicDataDetails[index]['image']!,
-                        MusicLists.musicDataDetails[index]['songName']!,
-                        MusicLists.musicDataDetails[index]['movieName']!,
-                        index,
-                      )
+                      icon: const Icon(Icons.delete ,color: Colors.red,),
+                      onPressed: () {
+                        setState(() {
+                          musicDataDetails.removeWhere((item) => item['id'] == musicDataDetails[index]['id']);
+                          
+                        });
+                          print('removed');
+                      }
                       
                     )
                   ],
@@ -147,9 +177,9 @@ class _MusicListsState extends State<MusicLists> {
               Navigator.of(context).pushNamed(
                 PlayingScreen.routeName , 
                 arguments: PlayingScreenArgs(
-                  image: MusicLists.musicDataDetails[index]['image']! ,
-                  songName: MusicLists.musicDataDetails[index]['songName']! ,
-                  music: MusicLists.musicDataDetails[index]['music']!,
+                  image: musicDataDetails[index]['image']! ,
+                  songName: musicDataDetails[index]['songName']! ,
+                  music: musicDataDetails[index]['music']!,
                   isFavorite : favClicked ,
                   index : index
                 )

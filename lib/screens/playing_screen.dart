@@ -17,50 +17,7 @@ class PlayingScreen extends StatefulWidget {
 
 class _PlayingScreenState extends State<PlayingScreen> {
   var musicItemCount = 0;
-  static const musicInfos = [
-      {
-        'songName': 'Nanga Vera maari', 
-        'movieName': 'Valimai',
-        'image': 'assets/images/music.jpg',
-        'music': 'audio/nanga-vera-maari.mp3'
-      },
-      {
-        'songName': 'Neeyum naanum sernthe sellum neram',
-        'movieName': 'Naanum rowdy than',
-        'image': 'assets/images/neeyum-naanum.jpg',
-        'music': 'audio/neeyum-nanum.mp3'
-      },
-      { 
-        'songName': 'Antha arabic kadaloram', 
-        'movieName': 'Bombay', 
-        'image': 'assets/images/ar-rahman.jpg', 
-        'music': 'audio/andha-arabic.mp3'
-      },
-      {
-        'songName':'Anbe Peranbe',
-        'movieName' : 'NGK',
-        'image':'assets/images/anbe-peranbe-ngk.jpg',
-        'music':'audio/anbe-peranbe.mp3'
-      },
-      {
-        'songName':'Idhayathai etho ondru',
-        'movieName' : 'Yennai Arinthal',
-        'image':'assets/images/idhayathai.jpg',
-        'music':'audio/anbe-peranbe.mp3'
-      },
-      {
-        'songName':'Kambathu Ponnu',
-        'movieName':'Sandakozhi-2',
-        'image':'assets/images/sandakozhi-2.jpg',
-        'music':'audio/kambathu-ponnu.mp3'
-      },
-      {
-        'songName':'Penne unna partha',
-        'movieName' : 'Saamy-2',
-        'image':'assets/images/saamy-2.jpg',
-        'music':'audio/penne-unna-paartha-saamy2.mp3'
-      }
-  ];
+  
   bool playing = false; 
   IconData playBtn = Icons.play_arrow; 
 
@@ -121,6 +78,64 @@ class _PlayingScreenState extends State<PlayingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    List musicInfos = [
+      {
+        'songName': 'Nanga Vera maari', 
+        'movieName': 'Valimai',
+        'image': 'assets/images/music.jpg',
+        'music': 'audio/nanga-vera-maari.mp3'
+      },
+      {
+        'songName': 'Neeyum naanum sernthe sellum neram',
+        'movieName': 'Naanum rowdy than',
+        'image': 'assets/images/neeyum-naanum.jpg',
+        'music': 'audio/neeyum-nanum.mp3'
+      },
+      { 
+        'songName': 'Antha arabic kadaloram', 
+        'movieName': 'Bombay', 
+        'image': 'assets/images/ar-rahman.jpg', 
+        'music': 'audio/andha-arabic.mp3'
+      },
+      {
+        'songName':'Anbe Peranbe',
+        'movieName' : 'NGK',
+        'image':'assets/images/anbe-peranbe-ngk.jpg',
+        'music':'audio/anbe-peranbe.mp3'
+      },
+      {
+        'songName':'Idhayathai etho ondru',
+        'movieName' : 'Yennai Arinthal',
+        'image':'assets/images/idhayathai.jpg',
+        'music':'audio/anbe-peranbe.mp3'
+      },
+      {
+        'songName':'Kambathu Ponnu',
+        'movieName':'Sandakozhi-2',
+        'image':'assets/images/sandakozhi-2.jpg',
+        'music':'audio/kambathu-ponnu.mp3'
+      },
+      {
+        'songName':'Penne unna partha',
+        'movieName' : 'Saamy-2',
+        'image':'assets/images/saamy-2.jpg',
+        'music':'audio/penne-unna-paartha-saamy2.mp3'
+      },
+      {
+        'songName':'Inkem inkem kavaley',
+        'movieName' : 'Geeta Govindam',
+        'image':'assets/images/geeta-govindam.jpeg',
+        'music':'audio/inkem-inkem.mp3'
+      },
+      {
+        'songName':'Jada Jada - motivational song',
+        'movieName' : 'Saattai',
+        'image':'assets/images/samuthirakani.jpg',
+        'music':'audio/jada-jada.mp3'
+      }
+  ];
+
+
     final PlayingScreenArgs args = ModalRoute.of(context)?.settings.arguments as PlayingScreenArgs;
 
     var indexCount = args.index;
@@ -227,16 +242,16 @@ class _PlayingScreenState extends State<PlayingScreen> {
                                   PlayingScreen.routeName,
                                   arguments: indexCount == 0
                                       ? PlayingScreenArgs(
-                                      image: MusicLists.musicDataDetails[MusicLists.musicDataDetails.length-1]['image']! ,
-                                      songName: MusicLists.musicDataDetails[MusicLists.musicDataDetails.length-1]['songName']! ,
-                                      music: MusicLists.musicDataDetails[MusicLists.musicDataDetails.length-1]['music']!,
+                                      image: musicInfos[musicInfos.length-1]['image']! ,
+                                      songName: musicInfos[musicInfos.length-1]['songName']! ,
+                                      music: musicInfos[musicInfos.length-1]['music']!,
                                       isFavorite : args.isFavorite ,
-                                      index : MusicLists.musicDataDetails.length-1
+                                      index : musicInfos.length-1
                                     )
                                       : PlayingScreenArgs(
-                                      image: MusicLists.musicDataDetails[indexCount-1]['image']! ,
-                                      songName: MusicLists.musicDataDetails[indexCount-1]['songName']! ,
-                                      music: MusicLists.musicDataDetails[indexCount-1]['music']!,
+                                      image: musicInfos[indexCount-1]['image']! ,
+                                      songName: musicInfos[indexCount-1]['songName']! ,
+                                      music: musicInfos[indexCount-1]['music']!,
                                       isFavorite : args.isFavorite ,
                                       index : indexCount -1
                                     )
@@ -280,16 +295,16 @@ class _PlayingScreenState extends State<PlayingScreen> {
                                   arguments: 
                                   indexCount == 6
                                       ? PlayingScreenArgs(
-                                      image: MusicLists.musicDataDetails[indexCount = 0]['image']! ,
-                                      songName: MusicLists.musicDataDetails[indexCount = 0]['songName']! ,
-                                      music: MusicLists.musicDataDetails[indexCount = 0]['music']!,
+                                      image: musicInfos[indexCount = 0]['image']! ,
+                                      songName: musicInfos[indexCount = 0]['songName']! ,
+                                      music: musicInfos[indexCount = 0]['music']!,
                                       isFavorite : args.isFavorite ,
                                       index : indexCount = 0 
                                     )
                                       : PlayingScreenArgs(
-                                      image: MusicLists.musicDataDetails[indexCount+1]['image']! ,
-                                      songName: MusicLists.musicDataDetails[indexCount+1]['songName']! ,
-                                      music: MusicLists.musicDataDetails[indexCount+1]['music']!,
+                                      image: musicInfos[indexCount+1]['image']! ,
+                                      songName: musicInfos[indexCount+1]['songName']! ,
+                                      music: musicInfos[indexCount+1]['music']!,
                                       isFavorite : args.isFavorite ,
                                       index : indexCount + 1
                                     )
